@@ -9,7 +9,7 @@ A lightweight Python library for concurrent async event dispatching.
 
 ## Requirements
 
-- Python 3.12+
+- Python 3.14+
 
 ## Installation
 
@@ -77,6 +77,20 @@ class UserEvent(StrEnum):
 dispatcher: EventDispatcher[UserEvent] = EventDispatcher()
 
 @dispatcher.listen(UserEvent.CREATED)
+async def on_user_created(event: Event) -> None:
+    ...
+```
+
+You can also use `typing.Literal` for a fixed set of event names:
+
+```python
+from typing import Literal
+from aiodispatcher import EventDispatcher
+
+EventName = Literal["user.created", "user.deleted"]
+dispatcher: EventDispatcher[EventName] = EventDispatcher()
+
+@dispatcher.listen("user.created")
 async def on_user_created(event: Event) -> None:
     ...
 ```
@@ -194,3 +208,15 @@ A special event with no context (`Event[None]`). Use for simple notifications.
 | `EventListenerMap` | `dict[str, list[EventListener]]` | Maps event names to their listeners |
 | `ListenerErrors` | `dict[str, Exception]` | Maps listener names to their exceptions |
 | `TEventName` | `str` | Type alias for event names |
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## Changelog
+
+All notable changes to this project will be documented in the [CHANGELOG.md](CHANGELOG.md) file.
