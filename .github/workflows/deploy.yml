@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+    push:
+        tags:
+            - 'v*.*.*'
+    workflow_dispatch:
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: 3.14
+            - run: pip install uv twine
+            - run: uv build
+            - name: Check built distributions
+              run: twine check dist/*
+            - name: Publish to TestPyPI
+              run: twine upload --repository testpypi dist/*
+              env:
+                  TWINE_USERNAME: __token__
+                  TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
