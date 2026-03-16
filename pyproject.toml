@@ -76,8 +76,8 @@ testpaths = ["tests"]
 
 [tool.bumpversion]
 current_version = "0.1.1"
-commit = true
-tag = true
+commit = false
+tag = false
 
 [[tool.bumpversion.files]]
 filename = "pyproject.toml"
