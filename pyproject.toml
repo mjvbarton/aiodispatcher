@@ -1,6 +1,6 @@
 [project]
 name = "aiodispatcher"
-version = "0.1.1"
+version = "0.1.2"
 description = "A lightweight Python library for concurrent async event dispatching"
 readme = "README.md"
 authors = [
@@ -76,7 +76,7 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 
 [tool.bumpversion]
-current_version = "0.1.1"
+current_version = "0.1.2"
 commit = true
 tag = false
 
